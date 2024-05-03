@@ -17,14 +17,17 @@ $ pnpm run start:dev
 $ pnpm run start:prod
 ```
 
+
+
+
+
 ## 环境
 
 ```jsx
 nodejs ---- 16.19.1
 pnpm ------ 8.13.1
+mysql--------5.7.44
 ```
-
-
 
 ## License
 
