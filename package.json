@@ -8,8 +8,9 @@
   "scripts": {
     "build": "nest build",
     "start": "nest start",
+    "seed": "ts-node prisma/seed.ts",
     "dev": "nest start --watch",
-    "initDB":"prisma migrate dev",
+    "initDB": "prisma migrate dev",
     "resetDB": "prisma migrate reset"
   },
   "dependencies": {
