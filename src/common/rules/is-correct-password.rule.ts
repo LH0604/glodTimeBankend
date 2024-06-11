@@ -1,13 +1,12 @@
 import { PrismaClient } from '@prisma/client'
 import { verify } from 'argon2'
 import { registerDecorator, ValidationArguments, ValidationOptions } from 'class-validator'
-export function IsCorrectPassword(table: string, validationOptions?: ValidationOptions) {
+export function IsCorrectPassword(validationOptions?: ValidationOptions) {
   return function (object: Record<string, any>, propertyName: string) {
     registerDecorator({
       name: 'IsCorrectPassword',
       target: object.constructor,
       propertyName: propertyName,
-      constraints: [table],
       options: validationOptions,
       validator: {
         async validate(value: string, args: ValidationArguments) {
