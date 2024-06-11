@@ -9,7 +9,6 @@ export function IsCorrectPassword(validationOptions?: ValidationOptions) {
       validator: {
         async validate(value: string, args: ValidationArguments) {
           console.log(args)
-
           return true
         },
       },

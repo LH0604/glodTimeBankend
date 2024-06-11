@@ -1,4 +1,3 @@
-import { IsCorrectPassword } from '@/common/rules/is-correct-password.rule'
 import { IsExists } from '@/common/rules/is-exists.rule'
 import { IsNotEmpty } from 'class-validator'
 export class LoginDTO {
@@ -6,6 +5,6 @@ export class LoginDTO {
   @IsExists('user', { message: '用户名不存在' })
   account: string
   @IsNotEmpty({ message: '密码不能为空' })
-  @IsCorrectPassword({ message: '用户密码不正确' })
+  // @IsCorrectPassword({ message: '用户密码不正确' })
   password: string
 }

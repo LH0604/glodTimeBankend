@@ -16,6 +16,9 @@ export function IsCorrectPassword(validationOptions?: ValidationOptions) {
               account: args.object['account'],
             },
           })
+          if (!user) {
+            return false
+          }
           const bool = await verify(user.password, value)
           return bool
         },
