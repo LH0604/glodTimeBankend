@@ -3,10 +3,13 @@ import { LoginDTO } from './dto/login.dto'
 import { RegisterDTO } from './dto/register.dto'
 import { PrismaService } from 'src/prisma/prisma.service'
 import { hash, verify } from 'argon2'
-
+import { JwtService } from '@nestjs/jwt'
 @Injectable()
 export class UserService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly jwt: JwtService,
+  ) {}
   async register(data: RegisterDTO) {
     const user = await this.prisma.user.create({
       data: {
@@ -14,7 +17,7 @@ export class UserService {
         password: await hash(data.password),
       },
     })
-    return user
+    return this.token(user)
   }
   async login(data: LoginDTO) {
     const user = await this.prisma.user.findUnique({
@@ -24,8 +27,12 @@ export class UserService {
     })
     const flag = !(await verify(user.password, data.password))
     if (flag) {
-      throw new BadRequestException('密码错误')
+      throw new BadRequestException({ code: 400, message: '密码错误' })
     }
-    return user
+    return this.token(user)
+  }
+  async token(user: Record<string, any>) {
+    const res = await this.jwt.signAsync({ account: user.account, id: user.id })
+    return { token: res }
   }
 }

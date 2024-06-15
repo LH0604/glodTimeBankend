@@ -16,7 +16,7 @@ export default class Validate extends ValidationPipe {
     })
     throw new HttpException(
       {
-        statusCode: HttpStatus.UNPROCESSABLE_ENTITY,
+        code: HttpStatus.UNPROCESSABLE_ENTITY,
         message: error,
       },
       HttpStatus.UNPROCESSABLE_ENTITY,
