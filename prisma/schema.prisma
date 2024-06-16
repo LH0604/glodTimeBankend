@@ -19,5 +19,5 @@ model user {
   account     String   @unique
   password    String
   createdAt   DateTime @default(now())
-  loginDevice String
+  // loginDevice String
 }
